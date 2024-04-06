@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The UserService class.
@@ -22,6 +23,9 @@ public class UserService {
 
     private final Repo repo;
 
+    /**
+     * The Constructor.
+     */
     @Autowired
     UserService(Repo repo) {
         this.repo = repo;
@@ -33,11 +37,18 @@ public class UserService {
      */
     public User addUser(final User user, final String correlationId) {
         String id = idGenerator();
-        logger.info("Inside addUserService : {}", correlationId);
+        logger.info("Inside addUserService : {} ", correlationId);
         user.setId(id);
         user.getAddress().setUserId(id);
-
         return repo.save(user);
+    }
+
+    /**
+     * @param CorrelationId The correlationId
+     * @return The List of Users.
+     */
+    public List<User> fetchAllUsers(final String CorrelationId) {
+        return repo.findAll();
     }
 
     private String idGenerator() {
