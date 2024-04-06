@@ -24,6 +24,10 @@ public final class ApplicationConstants {
     }
 
     public static final class Headers {
+        private Headers() {
+            // private constructor.
+        }
+
         public static final String CORRELATION_ID = "Correlation_Id";
     }
 
